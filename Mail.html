@@ -1,0 +1,55 @@
+<body onload="init()">
+    <form enctype="text/plain" accept-charset="utf-8">
+        <!-- First Name    -->
+        <input id="firstNameText" type="text" name="Name" value size="60" placeholder="First Name" required>
+        <!-- Last Name    -->
+        <input id="lastNameText" type="text" name="Name" value size="60" placeholder="Last Name" required>
+        <!-- Title -->
+        <input id="titleText" type="text" name="Subject" value size="60" aria-invalid="false" placeholder="Title" required>
+        <!-- Company -->
+        <input id="compText" type="text" name="Company" value size="60" aria-invalid="false" placeholder="Company">
+        <!-- Email -->
+        <input id="emailText" type="email" name="Email" value size="60" placeholder="Email" required>
+        <!-- Country -->
+        <input id="counText" type="tel" name="Country" value size="60" aria-invalid="false" placeholder="Country" required>
+
+        <!-- Content -->
+        <textarea id="bodyText" name="your-message" cols="40" rows="10" aria-required="true" aria-invalid="false" placeholder="Your Questions or Needs" required></textarea>
+
+        <!-- 傳送按鈕 -->
+        <div>
+            <input type="button" value="Submit" onclick="submitHandler();">
+            <a id="mailTo"></a>
+        </div>
+    </form>
+</body>
+<script>
+    
+    var initSubject = '', initBody = '';
+
+    //按下傳送按鈕後執行
+    function submitHandler() {
+        var to = "service@statplus.com";
+        var firstName = firstNameText.value;
+        var lastName = lastNameText.value;
+        var email = emailText.value;
+        var comp = compText.value;
+        var country = counText.value;
+        var title = titleText.value;
+        //把user填的資料都塞到 mail body 中
+        var body = "" + bodyText.value + '%0A%0A%0A';
+        body += "From：" + firstNameText.value + lastNameText + '%0A';
+        body += "Email：" + emailText.value + '%0A';
+        body += "Company：" + compText.value + '%0A';
+        body += "Country：" + counText.value;
+        //傳送的主要程式碼
+        mailTo.href = "mailto:" + to + "?subject=" + title + "&body=" + body;
+        mailTo.click();
+    }
+    //在body onload
+    function init() {
+        titleText.value = initSubject;
+        toText.value = initTo;
+        bodyText.value = initBody;
+    }
+</script>
