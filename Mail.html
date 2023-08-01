@@ -27,6 +27,16 @@
                 margin-bottom: 10px;
             }
         }
+        .mailText {
+                width: 50%;
+                height: 30px;
+                margin-bottom: 10px;
+            }
+
+            .mailTextarea {
+                width: 50%;
+                margin-bottom: 10px;
+            }
     </style>
 </head>
 <body onload="init()">
@@ -47,7 +57,7 @@
         <!-- Content -->
         <textarea id="bodyText" class="mailTextarea" name="your-message" cols="40" rows="10" aria-required="true" aria-invalid="false" placeholder="Your Questions or Needs" required></textarea>
 
-        <!-- ¶Ç°e«ö¶s -->
+        <!-- å‚³é€æŒ‰éˆ• -->
         <div>
             <input type="button" value="Submit" onclick="submitHandler();">
             <a id="mailTo"></a>
@@ -58,7 +68,7 @@
     
     var initSubject = '', initBody = '';
 
-    //«ö¤U¶Ç°e«ö¶s«á°õ¦æ
+    //æŒ‰ä¸‹å‚³é€æŒ‰éˆ•å¾ŒåŸ·è¡Œ
     function submitHandler() {
         var to = "service@statplus.com";
         var firstName = firstNameText.value;
@@ -67,17 +77,17 @@
         var comp = compText.value;
         var country = counText.value;
         var title = titleText.value;
-        //§âuser¶ñªº¸ê®Æ³£¶ë¨ì mail body ¤¤
+        //æŠŠuserå¡«çš„è³‡æ–™éƒ½å¡åˆ° mail body ä¸­
         var body = "" + bodyText.value + '%0A%0A%0A';
         body += "From : " + firstNameText.value + lastNameText.value + '%0A';
         body += "Email : " + emailText.value + '%0A';
         body += "Company : " + compText.value + '%0A';
         body += "Country : " + counText.value;
-        //¶Ç°eªº¥D­nµ{¦¡½X
+        //å‚³é€çš„ä¸»è¦ç¨‹å¼ç¢¼
         mailTo.href = "mailto:" + to + "?subject=" + title + "&body=" + body;
         mailTo.click();
     }
-    //¦bbody onload
+    //åœ¨body onload
     function init() {
         titleText.value = initSubject;
         toText.value = initTo;
