@@ -1,26 +1,34 @@
 <head>
     <meta charset="utf-8" />
     <style type="text/css">
-
+        .mailText{
+            width:50%;
+            height:30px;
+            margin-bottom:10px;
+        }
+        .mailTextarea {
+            width: 50%;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body onload="init()">
     <form enctype="text/plain" accept-charset="utf-8">
         <!-- First Name    -->
-        <input id="firstNameText" type="text" name="Name" value size="60" placeholder="First Name" required><br>
+        <input id="firstNameText" class="mailText" type="text" name="Name" value size="60" placeholder="First Name" required><br>
         <!-- Last Name    -->
-        <input id="lastNameText" type="text" name="Name" value size="60" placeholder="Last Name" required><br>
+        <input id="lastNameText" class="mailText" type="text" name="Name" value size="60" placeholder="Last Name" required><br>
         <!-- Title -->
-        <input id="titleText" type="text" name="Subject" value size="60" aria-invalid="false" placeholder="Title" required><br>
+        <input id="titleText" class="mailText" type="text" name="Subject" value size="60" aria-invalid="false" placeholder="Title" required><br>
         <!-- Company -->
-        <input id="compText" type="text" name="Company" value size="60" aria-invalid="false" placeholder="Company"><br>
+        <input id="compText" class="mailText" type="text" name="Company" value size="60" aria-invalid="false" placeholder="Company"><br>
         <!-- Email -->
-        <input id="emailText" type="email" name="Email" value size="60" placeholder="Email" required><br>
+        <input id="emailText" class="mailText" type="email" name="Email" value size="60" placeholder="Email" required><br>
         <!-- Country -->
-        <input id="counText" type="tel" name="Country" value size="60" aria-invalid="false" placeholder="Country" required><br>
+        <input id="counText" class="mailText" type="text" name="Country" value size="60" aria-invalid="false" placeholder="Country" required><br>
 
         <!-- Content -->
-        <textarea id="bodyText" name="your-message" cols="40" rows="10" aria-required="true" aria-invalid="false" placeholder="Your Questions or Needs" required></textarea>
+        <textarea id="bodyText" class="mailTextarea" name="your-message" cols="40" rows="10" aria-required="true" aria-invalid="false" placeholder="Your Questions or Needs" required></textarea>
 
         <!-- ¶Ç°e«ö¶s -->
         <div>
