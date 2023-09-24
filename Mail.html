@@ -1,75 +1,172 @@
 <head>
     <meta charset="utf-8" />
     <style type="text/css">
-        @media screen and (min-width: 1000px) {
-            .mailText {
-                width: 50%;
-                height: 30px;
-                margin-bottom: 10px;
-            }
-
-            .mailTextarea {
-                width: 50%;
-                margin-bottom: 10px;
-            }
+        body{
+            margin: 0;
         }
-        @media screen and (max-width: 999px){
-            .mailText {
-                width: 75%;
-                height: 50px;
-                font-size:30px;
-                margin-bottom: 10px;
-            }
-
-            .mailTextarea {
-                width: 75%;
-                font-size: 30px;
-                margin-bottom: 10px;
-            }
+        #form-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 12px;
+            width: 260px;
+            height: 464px;
         }
-        .mailText {
-                width: 50%;
-                height: 30px;
-                margin-bottom: 10px;
-            }
-
-            .mailTextarea {
-                width: 50%;
-                margin-bottom: 10px;
-            }
+        .mail-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 9px 12px 8px;
+            border-bottom: solid 2px;
+            border-color: rgba(0, 0, 0, 0.4);
+            background-color: rgb(0, 0, 0, 0.1);
+            font-family: system-ui;
+        }
+        .mail-container.warning{
+            outline: 0;
+            border-bottom: solid 3px;
+            border-color: crimson;
+        }
+        .mail-container:focus-within{
+            outline: 0;
+            border-bottom: solid 3px;
+            border-color: #1976D2;
+        }
+        .mail-container p{
+            font-size: 12px;
+            margin: 0;
+        }
+        .mail-container.warning p{
+            color: crimson;
+        }
+        .mail-container:focus-within p{
+            color: #1976D2;
+        }
+        .mail-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            border: 0px;
+            padding: 0px;
+            isolation: isolate;
+            width: 260px;
+            height: 40px;
+            font-size: 16px;
+            background: transparent;
+        }
+        .mail-text:focus{
+            outline: 0;
+        }
+        #mail-submit {
+            width: 118px;
+            height: 42px;
+            border: solid 1px;
+            border-radius: 5px;
+            border-color: #1976D2;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 0.4px;
+            color: #1976D2;
+            background: #ffffffff;
+            cursor: pointer;
+        }
+        #mail-submit.ready{
+            color: #ffffff;
+            background: #1976D2;
+        }
     </style>
+    <script src="source/jQuery3.7.1.js"></script>
 </head>
 <body onload="init()">
-    <form enctype="text/plain" accept-charset="utf-8">
+    <form enctype="text/plain" accept-charset="utf-8" id="form-layout">
         <!-- First Name    -->
-        <input id="firstNameText" class="mailText" type="text" name="Name" value size="60" placeholder="First Name" required><br>
+        <div class="mail-container">
+            <p>First Name</p>
+            <input id="firstNameText" class="mail-text" type="text" name="Name" size="60" placeholder="First Name" required>
+        </div>
         <!-- Last Name    -->
-        <input id="lastNameText" class="mailText" type="text" name="Name" value size="60" placeholder="Last Name" required><br>
+        <div class="mail-container">
+            <p>Last Name</p>
+            <input id="lastNameText" class="mail-text" type="text" name="Name" size="60" placeholder="Last Name" required>
+        </div>
         <!-- Title -->
-        <input id="titleText" class="mailText" type="text" name="Subject" value size="60" aria-invalid="false" placeholder="Title" required><br>
+        <div class="mail-container">
+            <p>Title</p>
+            <input id="titleText" class="mail-text" type="text" name="Subject" size="60" aria-invalid="false" placeholder="Title" required>
+        </div>
         <!-- Company -->
-        <input id="compText" class="mailText" type="text" name="Company" value size="60" aria-invalid="false" placeholder="Company"><br>
-        <!-- Email -->
-        <input id="emailText" class="mailText" type="email" name="Email" value size="60" placeholder="Email" required><br>
-        <!-- Country -->
-        <input id="counText" class="mailText" type="text" name="Country" value size="60" aria-invalid="false" placeholder="Country" required><br>
-
+        <div class="mail-container">
+            <p>Company Name</p>
+            <input id="compText" class="mail-text" type="text" name="Company" size="60" aria-invalid="false" placeholder="Company">
+        </div>
+    <!-- Email -->
+        <div class="mail-container">
+            <p>Email</p>
+            <input id="emailText" class="mail-text" type="email" name="Email" size="60" placeholder="Email" required>
+        </div>
+    <!-- Country -->
+        <div class="mail-container">
+            <p>Country</p>
+            <input id="counText" class="mail-text" type="text" name="Country" size="60" aria-invalid="false" placeholder="Country" required>
+        </div>
         <!-- Content -->
-        <textarea id="bodyText" class="mailTextarea" name="your-message" cols="40" rows="10" aria-required="true" aria-invalid="false" placeholder="Your Questions or Needs" required></textarea>
-
+        <div class="mail-container">
+            <p>Your Questions or Needs</p>
+            <input id="bodyText" class="mail-text" type="text" name="Name" size="60" placeholder="Your Questions or Needs" required>
+        </div>
         <!-- 傳送按鈕 -->
         <div>
-            <input type="button" value="Submit" onclick="submitHandler();">
+            <input id="mail-submit" class="" type="button" value="SUBMIT" onclick="submitHandler();">
             <a id="mailTo"></a>
         </div>
     </form>
 </body>
 <script>
-    
+    $(function () {
+        $('body').keyup(function () {
+            var value = checkForm();
+            if (value) {
+                $('#mail-submit').addClass('ready');
+            }
+            else {
+                $('#mail-submit').removeClass('ready');
+            }
+        });
+    });
     var initSubject = '', initBody = '';
 
-    //按下傳送按鈕後執行
+    function checkForm() {
+        var value = true;
+        $('.mail-text').each(function () {
+            if ($(this).val().length === 0) {
+                value = false;
+            }
+            else {
+                $(this).parent().removeClass('warning');
+            }
+        });
+        return value;
+    }
+    //檢查後送出
+    function submit() {
+        if (checkForm()) {
+            submitHandler();
+        }
+        else {
+            
+        }
+    }
+    //送出
     function submitHandler() {
+        if (!checkForm()) {
+            $('.mail-text').each(function () {
+                if ($(this).val().length === 0) {
+                    $(this).parent().addClass('warning');
+                }
+            });
+            return;
+        }
         var to = "service@statplus.com";
         var firstName = firstNameText.value;
         var lastName = lastNameText.value;
